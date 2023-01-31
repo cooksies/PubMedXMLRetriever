@@ -1,23 +1,27 @@
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
+/* import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller; */
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class PubMedRetriever {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
         
         //load and parse XML file
     File xmlFile = new File("4020a1-datasets.xml");
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
     Document doc = dBuilder.parse(xmlFile);
-    Element root = doc.getDocumentElement().normalize();
+    doc.getDocumentElement().normalize();
 
     // Get the elements with the tag name "ArticleTitle"
     NodeList articleTitleNodes = doc.getElementsByTagName("ArticleTitle");
