@@ -4,10 +4,12 @@ import java.io.InputStream;
 /* import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller; */
 
+//import xml parser
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+//import DOM API
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -18,6 +20,7 @@ public class PubMedRetriever {
         
         //load and parse XML file
     File xmlFile = new File("4020a1-datasets.xml");
+    //create a document builder that parses the XML file
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
     Document doc = dBuilder.parse(xmlFile);
@@ -27,6 +30,7 @@ public class PubMedRetriever {
     NodeList articleTitleNodes = doc.getElementsByTagName("ArticleTitle");
     for (int i = 0; i < articleTitleNodes.getLength(); i++) {
         Element articleTitleElement = (Element) articleTitleNodes.item(i);
+        //print the text content of each element
         System.out.println("Article Title: " + articleTitleElement.getTextContent());
     }
     /* //Send the HTTP GET request to retrieve the XML data
