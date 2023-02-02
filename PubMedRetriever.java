@@ -51,7 +51,15 @@ public class PubMedRetriever {
       * Database query parameters: db=pubmed;
       * Search term: term=cancer;
       */
-     String url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=cancer&retmax=10"; 
+     String base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"; //esearch.fcgi?db=pubmed&term=cancer&retmax=10"; 
+     /*
+      * customize the cgi language to access the desired reuqests
+      */
+     String term = " ";     //This is the query that will be searched up in the database (ex. Cancer, will search for cancer related articles)
+     int ret = 10; //set this as return variable - see Entrez website
+     String retString = Integer.toString(ret);
+     String url = base + "esearch.fcgi?db=pubmed&term=" + term + "&retmax=" + retString;
+     
      URL obj = new URL(url);
      HttpURLConnection con = (HttpURLConnection) obj.openConnection();
      con.setRequestMethod("GET");
