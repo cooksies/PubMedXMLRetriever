@@ -36,7 +36,7 @@ public class PubMedRetriever {
 
     // Get the elements with the tag name "ArticleTitle"
     NodeList articleTitleNodes = doc.getElementsByTagName("ArticleTitle");
-    for (int i = 0; i < articleTitleNodes.getLength(); i++) {
+    for (int i = 0; i < articleTitleNodes.getLength(); i++) { //limited the length of nodesList to access to 500
         Element articleTitleElement = (Element) articleTitleNodes.item(i);
         //print the text content of each element
         System.out.println("Article Title: " + articleTitleElement.getTextContent());
@@ -55,14 +55,16 @@ public class PubMedRetriever {
      /*
       * customize the cgi language to access the desired reuqests
       */
-     String term = " ";     //This is the query that will be searched up in the database (ex. Cancer, will search for cancer related articles)
-     String url = base + "esearch.fcgi?db=pubmed&term=" + term + "&retstart=0";
-     
+     String term = "John";     //This is the query that will be searched up in the database (ex. Cancer, will search for cancer related articles)
+     String url = base + "esearch.fcgi?db=pubmed&term=" + term + "&mindate=2000/07/01&maxdate=2000/07/01&datetype=pdat&retmax=10000&usehistory=y";
      URL obj = new URL(url);
      HttpURLConnection con = (HttpURLConnection) obj.openConnection();
      con.setRequestMethod("GET");
+
+     /* I don't think this line is necessary
      int responseCode = con.getResponseCode();
-     System.out.println("Response Code : " + responseCode);
+     System.out.println("Response Code : " + responseCode); 
+     */
      BufferedReader in = new BufferedReader(
          new InputStreamReader(con.getInputStream()));
      String inputLine;
