@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 //import xml parser
 import javax.xml.parsers.DocumentBuilder;
@@ -15,6 +16,8 @@ import org.xml.sax.SAXException;
 
 public class Parse {
 
+    ArrayList<String> Titles = new ArrayList<>();
+
     public Parse(File xmlFile) throws ParserConfigurationException, SAXException, IOException {
         //create a document builder that parses the XML file
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -27,8 +30,14 @@ public class Parse {
     for (int i = 0; i < articleTitleNodes.getLength(); i++) { 
         Element articleTitleElement = (Element) articleTitleNodes.item(i);
         //print the text content of each element
-        System.out.println("Article Title: " + articleTitleElement.getTextContent());
+        //System.out.println("Article Title: " + articleTitleElement.getTextContent());
+        //Save the title in the arrayList
+        Titles.add(articleTitleElement.getTextContent());
     }
+    }
+
+    public ArrayList<String> getTitles() {
+        return Titles;
     }
 
 }

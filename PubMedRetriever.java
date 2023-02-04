@@ -32,8 +32,13 @@ public class PubMedRetriever {
     * Load and parse XML file
     */
     File xmlFile = new File("4020a1-datasets.xml");
-
+    
+    //create Parse object
     Parse parser = new Parse(xmlFile);
+    //Output all of the Article Titles
+    for (String titles : parser.getTitles()) {
+        System.out.println(titles);
+    }
 
     /* //create a document builder that parses the XML file
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
