@@ -15,10 +15,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+//imports for PubMed API
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class PubMedRetriever {
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
         
-        //load and parse XML file
+    /*
+    * Load and parse XML file
+    */
     File xmlFile = new File("4020a1-datasets.xml");
     //create a document builder that parses the XML file
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -33,6 +41,38 @@ public class PubMedRetriever {
         //print the text content of each element
         System.out.println("Article Title: " + articleTitleElement.getTextContent());
     }
+
+    /*
+     * Send Requests to PubMed server API
+     */
+
+     /*
+      * Using an example URL using the pubmed server api provided
+      * Database query parameters: db=pubmed;
+      * Search term: term=cancer;
+      */
+     String base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"; //esearch.fcgi?db=pubmed&term=cancer&retmax=10"; 
+     /*
+      * customize the cgi language to access the desired reuqests
+      */
+     String term = " ";     //This is the query that will be searched up in the database (ex. Cancer, will search for cancer related articles)
+     String url = base + "esearch.fcgi?db=pubmed&term=" + term + "&retstart=0";
+     
+     URL obj = new URL(url);
+     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+     con.setRequestMethod("GET");
+     int responseCode = con.getResponseCode();
+     System.out.println("Response Code : " + responseCode);
+     BufferedReader in = new BufferedReader(
+         new InputStreamReader(con.getInputStream()));
+     String inputLine;
+     StringBuffer response = new StringBuffer();
+     while ((inputLine = in.readLine()) != null) {
+       response.append(inputLine);
+     }
+     in.close();
+     System.out.println(response.toString());
+
     /* //Send the HTTP GET request to retrieve the XML data
     String url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
     InputStream input = new URL(url).openStream();
