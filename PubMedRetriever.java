@@ -4,7 +4,7 @@ import java.io.InputStream;
 /* import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller; */
 
-//import xml parser
+/* //import xml parser
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,7 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import org.xml.sax.SAXException; */
 
 //imports for PubMed API
 import java.io.BufferedReader;
@@ -21,14 +21,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 public class PubMedRetriever {
-    public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
+    public static void main(String[] args) throws IOException, ParserConfigurationException, SAXException{
         
     /*
     * Load and parse XML file
     */
     File xmlFile = new File("4020a1-datasets.xml");
-    //create a document builder that parses the XML file
+
+    Parse parser = new Parse(xmlFile);
+
+    /* //create a document builder that parses the XML file
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
     Document doc = dBuilder.parse(xmlFile);
@@ -40,7 +47,7 @@ public class PubMedRetriever {
         Element articleTitleElement = (Element) articleTitleNodes.item(i);
         //print the text content of each element
         System.out.println("Article Title: " + articleTitleElement.getTextContent());
-    }
+    } */
 
     /*
      * Send Requests to PubMed server API
