@@ -35,10 +35,10 @@ public class PubMedRetriever {
     //create Parse object
     Parse parser = new Parse(xmlFile);
     //Output all of the Article Titles
-    for (String titles : parser.getTitles()) {
+    /* for (String titles : parser.getTitles()) {
         System.out.println(titles);
 
-    }
+    } */
 
     /*
      * Send Requests to PubMed server API
