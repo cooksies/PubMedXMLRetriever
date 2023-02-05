@@ -33,44 +33,32 @@ public class Parse {
     NodeList articleTitleNodes = doc.getElementsByTagName("ArticleTitle");
     NodeList authorLastNameNodes = doc.getElementsByTagName("LastName");
     NodeList authorInitialsNodes = doc.getElementsByTagName("Initials");
-    Node dCom = doc.getElementsByTagName("DateCompleted").item(0);
-    NodeList dateCompleteNodes = dCom.getChildNodes();
+    
     
     for (int i = 0; i < articleTitleNodes.getLength(); i++) { 
         Element articleTitleElement = (Element) articleTitleNodes.item(i);
         Element authorLastNameElement = (Element)authorLastNameNodes.item(i);
         Element authorInitialsElement = (Element)authorInitialsNodes.item(i);
-        
+        DateReformatter dateReformat = new DateReformatter();
 
+        /* Node dCom = doc.getElementsByTagName("DateCompleted").item(i);
+        NodeList dateCompleteNodes = dCom.getChildNodes(); //i think this places me in a loop
         for (int j = 0; j < dateCompleteNodes.getLength(); j++) {
             Node child = dateCompleteNodes.item(j);
-            switch (j) {
-                case 0:
-                    dateReformat.setYear(child.getTextContent());
-                    continue;
-                case 1:
-                    dateReformat.setMonth(child.getTextContent());
-                    continue;
-                case 2:
-                    dateReformat.setDay(child.getTextContent());
-                    continue;
-                default:
-                    break;
-            }
             //System.out.println(child.getNodeName() + ": " + child.getTextContent());
-          }
+          } *///this doesn't work
 
         //print the text content of each element
         System.out.println("Article Title: " + articleTitleElement.getTextContent() + "\n" +
         "Author Last Name: " + authorLastNameElement.getTextContent() + "\n" +
-        "Author Initials: " + authorInitialsElement.getTextContent() + "\n" +
-        "Date Completed: " + dateReformat.getDate());
+        "Author Initials: " + authorInitialsElement.getTextContent()); /* + "\n" +
+        "Date Completed: " + dateReformat.getDate()); */
 
         //Save the title in the arrayList
         Titles.add(articleTitleElement.getTextContent());
         LastNames.add(authorLastNameElement.getTextContent());
         Initials.add(authorInitialsElement.getTextContent());
-        dateCompleted.add(dateReformat.getDate());
+        //dateCompleted.add(dateReformat.getDate());
     }
     }
 
