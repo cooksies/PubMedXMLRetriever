@@ -18,6 +18,7 @@ import org.xml.sax.SAXException;
 public class Parse {
 
     ArrayList<String> Titles = new ArrayList<>();
+    ArrayList<String> Affiliations = new ArrayList<>();
     ArrayList<String> LastNames = new ArrayList<>();
     ArrayList<String> Initials = new ArrayList<>();
     ArrayList<String> dateCompleted = new ArrayList<>();
@@ -33,12 +34,15 @@ public class Parse {
     NodeList articleTitleNodes = doc.getElementsByTagName("ArticleTitle");
     NodeList authorLastNameNodes = doc.getElementsByTagName("LastName");
     NodeList authorInitialsNodes = doc.getElementsByTagName("Initials");
+    NodeList affiliationNodes = doc.getElementsByTagName("Affiliation");
     
     
     for (int i = 0; i < articleTitleNodes.getLength(); i++) { 
         Element articleTitleElement = (Element) articleTitleNodes.item(i);
         Element authorLastNameElement = (Element)authorLastNameNodes.item(i);
         Element authorInitialsElement = (Element)authorInitialsNodes.item(i);
+        Element affiliationElement  = (Element)affiliationNodes.item(i);
+
         DateReformatter dateReformat = new DateReformatter();
 
         /* Node dCom = doc.getElementsByTagName("DateCompleted").item(i);
@@ -49,13 +53,15 @@ public class Parse {
           } *///this doesn't work
 
         //print the text content of each element
-        System.out.println("Article Title: " + articleTitleElement.getTextContent() + "\n" +
+        System.out.println("\n" +"Article Title: " + articleTitleElement.getTextContent() + "\n" +
+        "Article Affiliation: " + affiliationElement.getTextContent() + "\n" +
         "Author Last Name: " + authorLastNameElement.getTextContent() + "\n" +
         "Author Initials: " + authorInitialsElement.getTextContent()); /* + "\n" +
         "Date Completed: " + dateReformat.getDate()); */
 
         //Save the title in the arrayList
         Titles.add(articleTitleElement.getTextContent());
+        Affiliations.add(articleTitleElement.getTextContent());
         LastNames.add(authorLastNameElement.getTextContent());
         Initials.add(authorInitialsElement.getTextContent());
         //dateCompleted.add(dateReformat.getDate());
