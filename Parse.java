@@ -61,11 +61,12 @@ public class Parse {
 
 
         // print the text content of each element
-        System.out.println("\n" +"Article Title: " + articleTitleElement.getTextContent() + "\n" +
+        System.out.println(
+        "\n" + "Article ID (local): " + i + "\n" +
+        "Article Title: " + articleTitleElement.getTextContent() + "\n" +
         "Article Affiliation: " + affiliationElement.getTextContent() + "\n" +
         // "Author Last Name: " + authorLastNameElement.getTextContent() + "\n" +
         // "Author Initials: " + authorInitialsElement.getTextContent()  + "\n" +
-
 
         "Date Created: " + dayElement.getTextContent()
         );
