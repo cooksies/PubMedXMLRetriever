@@ -27,7 +27,7 @@ public class http {
 
 
             System.out.println(j+1+"/"+ pmid.length); // Status
-            Thread.sleep(30); // slows down requests because of API restraints
+            Thread.sleep(0); // slows down requests because of API restraints
             //System.out.println("Title:"+TITLES[j]);
             //System.out.println("PMID:"+ PMID[j]);
             //System.out.println("URL:"+ URLS[j]);

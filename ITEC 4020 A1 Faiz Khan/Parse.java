@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Parse {
      private static final String url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?";
 
-    private static final String FILENAME = "src/4020a1-datasets.txt";
+    private static final String FILENAME = "4020a1-datasets.xml";
 
     public static void main(String[] args) {
         boolean check1,check2;

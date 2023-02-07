@@ -10,7 +10,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 public class outputXML {
-    public static final String path = "src/group5_result.xml";
+    public static final String path = "group5_result.xml";
     public static void main(String title[], String pmid[]){
         try{
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
