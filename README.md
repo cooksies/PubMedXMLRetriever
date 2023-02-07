@@ -11,5 +11,7 @@
  Certain ideas to add
   1. Split method into object classes to reduce time complexity, limit coupling, and avoid iteration
   2. Have the main method take in input for the query and place that query in the CGI language to obtain specified ArticleTitles based on query
+
+  ***Need extract PMID from pubmed to be able to link attributes and prevent errors from missing attributes***
   
        
