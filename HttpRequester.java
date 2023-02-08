@@ -12,7 +12,7 @@ public class HttpRequester {
             /*
             * There are a total of 5299 entries but because of API frequency restraint
             */
-            for (int i = 0; i < TITLES.size(); i++){
+            for (int i = 0; i < 10; i++){
 
                 //SEND HTTP REQUEST
                 HttpClient client = HttpClient.newHttpClient();
@@ -36,7 +36,7 @@ public class HttpRequester {
                 String s2 = s1.substring(s1.indexOf("Id>") + 3);
                 PMID.add(s2); 
 
-                System.out.println(i+1+"/"+ TITLES.size() + " entries processed"); // Status
+                System.out.println(i+1+"/"+ 10 + " entries processed"); // Status
                 Thread.sleep(10); // slows down requests because of API restraints
             }
         } catch (IOException e) {

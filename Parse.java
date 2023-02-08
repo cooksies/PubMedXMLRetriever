@@ -67,7 +67,7 @@ public class Parse {
     }
 
     public String CompletionDate(String compDate) {
-        year = compDate.substring(0, 4);
+        year = compDate.substring(0, 4); 
         month = compDate.substring(4, 6);
         day = compDate.substring(6);
         return year + "/" + month + "/" + day;

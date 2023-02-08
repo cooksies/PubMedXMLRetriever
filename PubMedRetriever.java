@@ -69,6 +69,7 @@ public class PubMedRetriever {
                 String delims = "[ ]";
                 String[] titlewords = title.split(delims);
                 for (int d=0; d<titlewords.length; d++){
+                    //Some titles here have quotation marks which will give an error in the query string
                     titlewords[d]=titlewords[d].replace("'","");
                     titlewords[d]=titlewords[d].replace('"',' ');
                     titlewords[d]=titlewords[d].replace(" ","");
