@@ -119,8 +119,7 @@ public class PubMedRetriever {
              * May contain side effects
              * Adds elements in the PMID ArrayList
              */
-            HttpRequester requestHttp = new HttpRequester();
-            requestHttp.request(TITLES, PMID, urlList);
+            new HttpRequester(TITLES, PMID, urlList);
 
             /*
              * This section is create a new XML file with only the PMID and Article titles
