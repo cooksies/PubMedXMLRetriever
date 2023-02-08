@@ -6,8 +6,10 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
 public class HttpRequester {
+    public HttpRequester() {
+        }
 
-    public HttpRequester(ArrayList<String> TITLES, ArrayList<String> PMID, ArrayList<String> urlList) {
+    public void request(ArrayList<String> TITLES, ArrayList<String> PMID, ArrayList<String> urlList) {
         try {
             /*
             * There are a total of 5299 entries but because of API frequency restraint
@@ -39,12 +41,21 @@ public class HttpRequester {
                 System.out.println(i+1+"/"+ 10 + " entries processed"); // Status
                 Thread.sleep(10); // slows down requests because of API restraints
             }
+            /*
+             * This section is create a new XML file with only the PMID and Article titles
+             * May contain side effects
+             * Creates a new XML file that will 
+             */
+            new XMLresult(TITLES, PMID);
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 }
+
+    
     
 }
 

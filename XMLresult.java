@@ -18,17 +18,16 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 public class XMLresult {
-    //public static final String path = "group5_result.xml";
+    public static final String path = "group5_result.xml";
     
     public XMLresult(ArrayList<String> TITLES, ArrayList<String> PMID) {
         //We are forming a new document builder to be able to create an xml file
-        DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
         try {
-            File path = new File("group5_result.xml");
-            DocumentBuilder   documentBuilder = documentFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(path);
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
 
-            //Create the Root Element "PubmedArticleSet"
+            //ROOT ELEMENT
             Element root = document.createElement("PubmedArticleSet");
             document.appendChild(root);
 
@@ -37,33 +36,25 @@ public class XMLresult {
                 Element PubmedArticle = document.createElement("PubmedArticle");
                 root.appendChild(PubmedArticle);
 
-                //<PMID>
+                //PMID
                 Element pmid = document.createElement("PMID");
                 pmid.appendChild(document.createTextNode(PMID.get(i)));
                 PubmedArticle.appendChild(pmid);
 
-                //<ArticleTitle>
-                Element articleTitle = document.createElement("ArticleTitle");
-                articleTitle.appendChild(document.createTextNode(TITLES.get(i)));
-                PubmedArticle.appendChild(articleTitle);
+                //Title
+                Element Title = document.createElement("ArticleTitle");
+                Title.appendChild(document.createTextNode(TITLES.get(i)));
+                PubmedArticle.appendChild(Title);
             }
 
+            //OUTPUTTING XML
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
-            if (document.getDoctype() != null) {
-                String systemValue = (new File (document.getDoctype().getSystemId())).getName();
-                transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, systemValue);
-            }
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(System.out);
+            StreamResult streamResult = new StreamResult(new File(path));
             transformer.transform(domSource, streamResult);
-        //OUTPUTTING XML
-        /* TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        DOMSource domSource = new DOMSource(document);
-        StreamResult streamResult = new StreamResult(new File(path));
-        transformer.transform(domSource, streamResult); */
+
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -83,10 +74,6 @@ public class XMLresult {
             if (te.getException() != null)
                 x = te.getException();
             x.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
     

@@ -119,14 +119,15 @@ public class PubMedRetriever {
              * May contain side effects
              * Adds elements in the PMID ArrayList
              */
-            new HttpRequester(TITLES, PMID, urlList);
+            HttpRequester requestHttp = new HttpRequester();
+            requestHttp.request(TITLES, PMID, urlList);
 
             /*
              * This section is create a new XML file with only the PMID and Article titles
              * May contain side effects
              * Creates a new XML file that will 
              */
-            new XMLresult(TITLES, PMID);
+            //new XMLresult(TITLES, PMID);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
