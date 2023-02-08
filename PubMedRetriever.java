@@ -129,8 +129,6 @@ public class PubMedRetriever {
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
-        }catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     
     }
