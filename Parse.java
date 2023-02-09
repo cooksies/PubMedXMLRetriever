@@ -1,6 +1,7 @@
-import java.util.ArrayList;
+
 
 public class Parse {
+    //variables
     private final String url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?";
     String year, month, day;
 
@@ -67,12 +68,16 @@ public class Parse {
     }
 
     public String CompletionDate(String compDate) {
-        year = compDate.substring(0, 4); 
+        year = compDate.substring(0, 4);
         month = compDate.substring(4, 6);
         day = compDate.substring(6);
         return year + "/" + month + "/" + day;
     }
 
+
+    /*
+     * Method to obtain the author name which will be used as on of the url query parameters
+     */
     public String getAuthorName(String lastName, String initials, boolean check1, boolean check2) {
         
         if (check1 == true && check2 == true){ 
@@ -91,21 +96,24 @@ public class Parse {
         }
     }
 
-    public String formURL(ArrayList<String> authors, ArrayList<String> compDates, ArrayList<String> pubDates, ArrayList<String> shortTitles, int i) {
-        if (authors.get(i)!=null && compDates.get(i)!=null){ //IF ARTICLE HAS AN AUTHOR
-            authors.get(i).replace(" ","%20");
-            return url+"db=pubmed&term="+authors.get(i)+"[au]"+pubDates.get(i)+"[pdat]"+compDates.get(i)+"[DCOM]";
+    /*
+     * Formulate a url with the retrieved parameters for a request
+     */
+    public String formURL(String[] authors, String[] compDates, String[] pubDates, String[] shortTitles, int i) {
+        if (authors[i]!=null && compDates[i]!=null){ //IF ARTICLE HAS AN AUTHOR
+            authors[i].replace(" ","%20");
+            return url+"db=pubmed&term="+authors[i]+"[au]"+pubDates[i]+"[pdat]"+compDates[i]+"[DCOM]";
         }
-        else if(authors.get(i)!=null && compDates.get(i)==null){
-            authors.get(i).replace(" ","%20");
-            return url+"db=pubmed&term="+authors.get(i)+"[au]"+pubDates.get(i)+"[pdat]"+shortTitles.get(i)+"[title]";
+        else if(authors[i]!=null && compDates[i]==null){
+            authors[i].replace(" ","%20");
+            return url+"db=pubmed&term="+authors[i]+"[au]"+pubDates[i]+"[pdat]"+shortTitles[i]+"[title]";
 
         }
-        else if(authors.get(i)==null && compDates.get(i)!=null){//IF NO AUTHOR STATED
-            return url+"db=pubmed&term="+pubDates.get(i)+"[pdat]"+shortTitles.get(i)+"[title]"+compDates.get(i)+"[DCOM]";
+        else if(authors[i]==null && compDates[i]!=null){//IF NO AUTHOR STATED
+            return url+"db=pubmed&term="+pubDates[i]+"[pdat]"+shortTitles[i]+"[title]"+compDates[i]+"[DCOM]";
         }
         else{
-            return url+"db=pubmed&term="+pubDates.get(i)+"[pdat]"+shortTitles.get(i)+"[title]";
+            return url+"db=pubmed&term="+pubDates[i]+"[pdat]"+shortTitles[i]+"[title]";
         }
 	}
 

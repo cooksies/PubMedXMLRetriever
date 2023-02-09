@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-
 //import xml parser
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,17 +13,6 @@ import org.xml.sax.SAXException;
 
 public class PubMedRetriever {
     public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
-        
-        /*
-        * Creating a an ArrayList for a dynamic list which will add in the specified element once it is read
-        */
-        ArrayList<String> authors = new ArrayList<>();
-        ArrayList<String> pubDates = new ArrayList<>();
-        ArrayList<String> shortTitles = new ArrayList<>();
-        ArrayList<String> urlList = new ArrayList<>();
-        ArrayList<String> compDates = new ArrayList<>();
-        ArrayList<String> TITLES = new ArrayList<>();
-        ArrayList<String> PMID = new ArrayList<>();
 
          //local variables
         String compDate;
@@ -49,6 +36,19 @@ public class PubMedRetriever {
 
             // Using this nodelist to identify how many entries we are working with using .getLength()
             NodeList list = doc.getElementsByTagName("PubmedArticle");
+
+            /*
+            * Creating a Arrays with the size of list.length
+            * Using an ArrayList was attempted but it caused an OutOFBoundException
+            */
+            String[] authors = new String[list.getLength()];
+            String[] pubDates = new String[list.getLength()];
+            String[] shortTitles = new String[list.getLength()];
+            String[] urlList = new String[list.getLength()];
+            String[] compDates = new String[list.getLength()];
+            String[] TITLES = new String[list.getLength()];
+            String[] PMID = new String[list.getLength()];
+            
             /*
              * Create an array that will go through all the entries
              * List.getLength() is used to determine the amount of loops
@@ -58,9 +58,9 @@ public class PubMedRetriever {
 
                 Element element = (Element)list.item(i);
 
-                // Add the read titles into our TITLES ArrayList
+                // Add the read titles into our TITLES Array
                 title = element.getElementsByTagName("ArticleTitle").item(0).getTextContent();
-                TITLES.add(title);
+                TITLES[i] = title;
                 /*
                  * With the given titles, PubMed queries max out at a certain word count
                  * We will only be obtaining the first two words in the title
@@ -69,12 +69,11 @@ public class PubMedRetriever {
                 String delims = "[ ]";
                 String[] titlewords = title.split(delims);
                 for (int d=0; d<titlewords.length; d++){
-                    //Some titles here have quotation marks which will give an error in the query string
                     titlewords[d]=titlewords[d].replace("'","");
                     titlewords[d]=titlewords[d].replace('"',' ');
                     titlewords[d]=titlewords[d].replace(" ","");
                 }
-                shortTitles.add(titlewords[0] + space + titlewords[1]) ;
+                shortTitles[i] = titlewords[0] + space + titlewords[1];
 
                 /*
                  * Get the publication date and creation date
@@ -82,14 +81,13 @@ public class PubMedRetriever {
                  * to a readable string type of date format YYYY/MM/DD
                  */
                 pubDate = element.getElementsByTagName("PubDate").item(0).getTextContent();
-                pubDates.add(parser.PublishDate(pubDate));
+                pubDates[i] = parser.PublishDate(pubDate);
                 if(element.getElementsByTagName("DateCompleted").getLength()>0){//some entries have no completion date listed
                     compDate = element.getElementsByTagName("DateCompleted").item(0).getTextContent();
-                    compDates.add(parser.CompletionDate(compDate));
+                    compDates[i] = parser.CompletionDate(compDate);
                 } 
                 else
-                    compDates.add(null);//this is to maintain array size of compDates with other ArrayLists
-                
+                    compDates[i] = null;//this is to maintain array size of compDates with other ArrayLists
                 
                 /*
                  * This section is to obtain the author names
@@ -105,12 +103,12 @@ public class PubMedRetriever {
                     initials = element.getElementsByTagName("Initials").item(0).getTextContent();
                     check2=true;
                 }
-                authors.add(parser.getAuthorName(lastName,initials, check1, check2));
+                authors[i] = parser.getAuthorName(lastName,initials, check1, check2);
 
                 /*
                  * This section of the loop will concatonate and form a parameter string for the url
                  */
-                urlList.add(parser.formURL(authors, compDates, pubDates, shortTitles, i));
+                urlList[i] = parser.formURL(authors, compDates, pubDates, shortTitles, i);
 
             }
             
@@ -120,13 +118,6 @@ public class PubMedRetriever {
              * Adds elements in the PMID ArrayList
              */
             new HttpRequester(TITLES, PMID, urlList);
-
-            /*
-             * This section is create a new XML file with only the PMID and Article titles
-             * May contain side effects
-             * Creates a new XML file that will 
-             */
-            //new XMLresult(TITLES, PMID);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();

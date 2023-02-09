@@ -1,6 +1,4 @@
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,12 +13,11 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 public class XMLresult {
     public static final String path = "group5_result.xml";
     
-    public XMLresult(ArrayList<String> TITLES, ArrayList<String> PMID) {
+    public XMLresult(String[] TITLES, String[] PMID) {
         //We are forming a new document builder to be able to create an xml file
         try {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
@@ -31,19 +28,19 @@ public class XMLresult {
             Element root = document.createElement("PubmedArticleSet");
             document.appendChild(root);
 
-            for(int i=0; i<TITLES.size();i++){
+            for(int i=0; i<TITLES.length;i++){
                 //<PubmedArticle>
                 Element PubmedArticle = document.createElement("PubmedArticle");
                 root.appendChild(PubmedArticle);
 
-                //PMID
+                //<PMID>
                 Element pmid = document.createElement("PMID");
-                pmid.appendChild(document.createTextNode(PMID.get(i)));
+                pmid.appendChild(document.createTextNode(PMID[i]));
                 PubmedArticle.appendChild(pmid);
 
-                //Title
+                //<ArticleTitle>
                 Element Title = document.createElement("ArticleTitle");
-                Title.appendChild(document.createTextNode(TITLES.get(i)));
+                Title.appendChild(document.createTextNode(TITLES[i]));
                 PubmedArticle.appendChild(Title);
             }
 
@@ -78,4 +75,3 @@ public class XMLresult {
     }
     
 }
-
