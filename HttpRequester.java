@@ -36,7 +36,7 @@ public class HttpRequester {
                     PMID[i] = s2; 
 
                     System.out.println(i+1+"/"+ TITLES.length + " entries processed"); // Status
-                    Thread.sleep(10); // slows down requests because of API restraints
+                    Thread.sleep(500); // slows down requests because of API restraints
             }
             /*
              * This section is create a new XML file with only the PMID and Article titles
