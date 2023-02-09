@@ -81,7 +81,8 @@ public class Parse {
     public String getAuthorName(String lastName, String initials, boolean check1, boolean check2) {
         
         if (check1 == true && check2 == true){ 
-            lastName=lastName.replace(" ","%20");//if the author has a space in their last name replace the space with %20 
+            lastName=lastName.replace(" ","%20");//if the author has a space in their last name replace the space with %20
+            initials = initials.replace(" ","%20");
             return lastName+"%20"+initials; //If both last name and initials are present then return lastname and initials concatenated with a URL whitespace using %20 in between
         }
         else if(check1 == true && check2 == false){
@@ -89,6 +90,7 @@ public class Parse {
             return lastName; //if the last name is only present return only last name
         }
         else if(check1 == false && check2 == true){
+            initials = initials.replace(" ","%20");
             return initials; //if the initials are only present return only initials
         }
         else{
