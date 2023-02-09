@@ -8,8 +8,13 @@
   
 <------------------------------------------------------------------------------------------------------------>
 
- Certain ideas to add
-  1. Split method into object classes to reduce time complexity, limit coupling, and avoid iteration
-  2. Have the main method take in input for the query and place that query in the CGI language to obtain specified ArticleTitles based on query
-  
-       
+To run and compile the PubMedXMLRetriever, you wil first have to download the .zip file of the code:
+[PubMedXMLRetriever-main.zip](https://github.com/cooksies/PubMedXMLRetriever/files/10691591/PubMedXMLRetriever-main.zip)
+
+The main class will be the PubMedRetriever.java
+The helper classes will be Parse.java, HttpRequester.java, and the XMLresult.java
+
+You may need to replace the file path for the "4020a1-datasets.xml" in PubMedRetriever.java(line: 25) to the
+appropriate file path of the xml file on your local machine.
+Similarly, you may also need to replace the file path for the "group5_result.xml" in XMLresult.java(line: 18) to the
+appropriate file path of the xml file on your local machine.
