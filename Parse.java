@@ -21,7 +21,7 @@ public class Parse {
             day = "01"; // "01" will act as a default value for an empty day
         }
 
-        //Creating a switch case that will conver the month into corresponding month numbers
+        //Creating a switch case that will convert the month into corresponding month numbers
         switch(month){
             case "Jan":
                 month = "01";
@@ -80,16 +80,16 @@ public class Parse {
      */
     public String getAuthorName(String lastName, String initials, boolean check1, boolean check2) {
         
-        if (check1 == true && check2 == true){ 
+        if (check1 == true && check2 == true){ //Has a last name and initials
             lastName=lastName.replace(" ","%20");//if the author has a space in their last name replace the space with %20
             initials = initials.replace(" ","%20");
             return lastName+"%20"+initials; //If both last name and initials are present then return lastname and initials concatenated with a URL whitespace using %20 in between
         }
-        else if(check1 == true && check2 == false){
+        else if(check1 == true && check2 == false){//Has last name but no initials
             lastName=lastName.replace(" ","%20");
             return lastName; //if the last name is only present return only last name
         }
-        else if(check1 == false && check2 == true){
+        else if(check1 == false && check2 == true){//Has no last name but has initials
             initials = initials.replace(" ","%20");
             return initials; //if the initials are only present return only initials
         }

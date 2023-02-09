@@ -12,7 +12,7 @@ public class HttpRequester {
             * There are a total of 5299 entries but because of API frequency restraint
             * there is a chance that we receive a "GOAWAY" or a "Remote server terminated handshake"
             */
-            for (int i = 0; i < TITLES.length; i++){
+            for (int i = 0; i < urlList.length; i++){ //change the value of TITLES.length to have a smaller test size
                     //SEND HTTP REQUEST
                     HttpClient client = HttpClient.newHttpClient();
                     HttpRequest request = HttpRequest.newBuilder()
@@ -35,8 +35,8 @@ public class HttpRequester {
                     String s2 = s1.substring(s1.indexOf("Id>") + 3);
                     PMID[i] = s2; 
 
-                    System.out.println(i+1+"/"+ TITLES.length + " entries processed"); // Status
-                    Thread.sleep(500); // slows down requests because of API restraints
+                    System.out.println(i+1+"/"+ urlList.length + " entries processed"); // Status
+                    Thread.sleep(200); // slows down requests because of API restraints
             }
             /*
              * This section is create a new XML file with only the PMID and Article titles
