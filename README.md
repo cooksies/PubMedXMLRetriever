@@ -8,10 +8,6 @@
   
 <------------------------------------------------------------------------------------------------------------>
 
-To run and compile the PubMedXMLRetriever, you wil first have to download the .zip file of the code:
-(INSERT ZIP FILE HERE ONCE ENTIRE README IS COMPLETE)
-
-
 The main class will be the PubMedRetriever.java
 The helper classes will be Parse.java, HttpRequester.java, and the XMLresult.java
 
