@@ -16,6 +16,9 @@ appropriate file path of the xml file on your local machine.
 Similarly, you may also need to replace the file path for the "group5_result.xml" in XMLresult.java(line: 18) to the
 appropriate file path of the xml file on your local machine.
 
+Running the entire program to successfully fill the "group5_result.xml" file may take a long time to process.
+We advise creating small tests by decreasing the number of iterations for the for-loop in the HttpRequester.java file.
+
 <------------------------------------------------------------------------------------------------------------>
 
 To run PubMedXMLRetriever in CMD:
